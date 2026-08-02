@@ -1,7 +1,7 @@
 import path from 'path';
 import { createServer as createViteServer } from 'vite';
 import dotenv from 'dotenv';
-import { createApp } from './src/server/app';
+import { createApp } from './src/server/app.js';
 
 dotenv.config({ path: '.env.local' });
 dotenv.config();

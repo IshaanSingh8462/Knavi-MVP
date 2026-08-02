@@ -1,7 +1,7 @@
 import express from 'express';
 import { randomUUID } from 'crypto';
-import { generatePlan, decomposeTasks, decomposeNodeFurther, MAX_NODE_DEPTH } from '../lib/ai/client';
-import { getRequestUser } from '../lib/supabase/serverClient';
+import { generatePlan, decomposeTasks, decomposeNodeFurther, MAX_NODE_DEPTH } from '../lib/ai/client.js';
+import { getRequestUser } from '../lib/supabase/serverClient.js';
 
 // This is the ENTIRE Express app (route definitions only) — no app.listen(),
 // no Vite dev-server middleware. It's a plain export so it can be reused as:

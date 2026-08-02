@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import { createApp } from '../src/server/app';
+import { createApp } from '../src/server/app.js';
 
 // This is what Vercel actually invokes for every /api/* request (see the
 // rewrite rule in vercel.json — it sends every /api/(.*) path here, and

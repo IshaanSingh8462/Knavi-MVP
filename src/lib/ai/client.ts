@@ -3,9 +3,9 @@ dotenv.config({ path: '.env.local' });
 dotenv.config();
 
 import { GoogleGenAI } from "@google/genai";
-import { buildPlanPrompt, PlanInput, buildDecomposePrompt, DecomposeInput, buildNodeBreakdownPrompt, NodeBreakdownInput } from './prompts';
-import { WeeklyPlanSchema, LevelsArraySchema, NodeBreakdownResponseSchema, DecodedPlan, DecodedLevel, DecodedNodeBreakdown } from './schemas';
-export { MAX_NODE_DEPTH } from '../constants';
+import { buildPlanPrompt, PlanInput, buildDecomposePrompt, DecomposeInput, buildNodeBreakdownPrompt, NodeBreakdownInput } from './prompts.js';
+import { WeeklyPlanSchema, LevelsArraySchema, NodeBreakdownResponseSchema, DecodedPlan, DecodedLevel, DecodedNodeBreakdown } from './schemas.js';
+export { MAX_NODE_DEPTH } from '../constants.js';
 
 const GEMINI_API_KEY =
   process.env.GEMINI_API_KEY ||
@@ -164,10 +164,6 @@ export async function decomposeTasks(input: DecomposeInput): Promise<DecodedLeve
   }
 }
 
-// Powers "Break Down Further" on a single node. Returns either a small set
-// of sub-steps, or sufficientAlready=true, which the route turns into the
-// "that's enough — try it, and research further if you get stuck" message
-// instead of a fabricated breakdown.
 export async function decomposeNodeFurther(input: NodeBreakdownInput): Promise<DecodedNodeBreakdown> {
   const prompt = buildNodeBreakdownPrompt(input);
 

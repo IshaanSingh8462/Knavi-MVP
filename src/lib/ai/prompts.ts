@@ -1,4 +1,4 @@
-import { Activity } from '../../types/index';
+import { Activity } from '../../types/index.js';
 
 export interface PlanInput {
   goal: string;
@@ -107,12 +107,6 @@ You MUST respond strictly with a JSON array of levels matching this exact schema
 ]`;
 }
 
-// Powers the per-node "Break Down Further" button. Deliberately narrower in
-// scope than buildDecomposePrompt: this is splitting ONE existing 20-30
-// minute step into a couple of smaller, more concrete sub-steps, not
-// generating a whole new trail. It's also explicitly told to know when to
-// stop, which is the behavior that differentiates this from a bottomless
-// "keep breaking it down forever" tool.
 export function buildNodeBreakdownPrompt(input: NodeBreakdownInput): string {
   return `You are helping a student break ONE existing study step into a couple of smaller, more concrete sub-steps.
 

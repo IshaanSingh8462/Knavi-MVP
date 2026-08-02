@@ -8,9 +8,6 @@ export interface User {
   id: string;
   email: string;
   name?: string;
-  // True for a Supabase anonymous-auth session (the "Enter as Guest" flow).
-  // Guests never write anything — App.tsx routes them straight to a
-  // read-only Public Journeys view instead of onboarding/setup.
   isGuest?: boolean;
 }
 
@@ -58,9 +55,6 @@ export interface Level {
   status: LevelStatus;
   skipped: boolean;
   completed_at: string | null;
-  // Sub-step breakdown tracking. depth 0 = a normal trail node. depth 1+ =
-  // a node produced by "Break Down Further" on a depth-1 parent. We cap
-  // depth so the app doesn't let a task spiral into infinite micro-steps.
   depth: number;
   parent_level_id: string | null;
 }
@@ -73,7 +67,6 @@ export interface Streak {
   longest_streak: number;
 }
 
-// Public Journeys gallery card — a published task plus a count of its steps.
 export interface PublicJourneyCard {
   task: Task;
   levelCount: number;

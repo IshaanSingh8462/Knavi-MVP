@@ -37,6 +37,18 @@ both local dev (`server.ts`) and Vercel (`api/index.ts`) import the same
    Vite framework for the static build and auto-detects `api/index.ts` as
    a serverless function.
 
+## Update: ERR_MODULE_NOT_FOUND fix
+If you already applied the first version of this fix and got
+`ERR_MODULE_NOT_FOUND: Cannot find module '/var/task/src/server/app'`,
+that's a second, separate issue: your `package.json` has `"type": "module"`,
+so Vercel's Node runtime uses Node's native ESM loader, which — unlike
+Vite/tsx locally — requires **explicit `.js` extensions** on every relative
+import. This package now has that fixed throughout the whole server-side
+call graph (`api/index.ts` → `src/server/app.ts` → `src/lib/ai/client.ts` →
+`src/lib/ai/prompts.ts` → `src/types/index.ts`, and `src/lib/supabase/serverClient.ts`).
+It now includes the full set of server-side files (not just the four from
+the first pass) so nothing in that chain is missing an extension.
+
 ## If it still fails after this
 Most likely culprit: **function timeout**. Gemini plan generation runs
 multiple parallel calls with retry logic, which can be slow. Vercel Hobby
